@@ -1,0 +1,36 @@
+#nav {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+}
+
+#search {
+    position: absolute;
+    left:50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
+#search_bar {
+    width: 400px;
+    border-radius: 10px;
+    margin: 20px
+}
+
+#submit {
+    margin: 0;
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+}
+
+#lucky {
+    margin: 0;
+    position: absolute;
+    top: 200%;
+    left: 50%;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+}
