@@ -5,9 +5,24 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
     <body>
+        <div>
+            <a href="imageSearch.html">Images</a>
+            <a href="index.html">Search</a>
+        </div>
         <form action="https://www.google.com/search">
-            <input type="text" name="q">
-            <input type="submit" value="Google Search">
+            <label for="all">all these words:</label>
+            <input type="text" name="all"> <br>
+
+            <label for="exact">this exact word or phrase:</label>
+            <input type="text" name="exact"> <br>
+
+            <label for="any">any of these words:</label>
+            <input type="text" name="any"> <br>
+
+            <label for="none">none of these words:</label>
+            <input type="text" name="none"> <br>
+
+            <input type="submit" value="Advanced Search">
         </form>
     </body>
 </html>
