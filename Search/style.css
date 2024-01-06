@@ -34,3 +34,26 @@
     -ms-transform: translate(-50%, -50%);
     transform: translate(-50%, -50%);
 }
+
+#advanced_submit {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    background-color: rgb(114, 114, 255);
+    color: white;
+}
+
+#advanced_search_bar {
+    width: 400px;
+    border-radius: 10px;
+    margin: 20px;
+    align-items: left;
+}
+
+#advanced_search {
+    display: flex;
+    align-items: left;
+    flex-direction: column;
+}
