@@ -23,6 +23,4 @@ def entry(request, title):
     if html == None:
         return render(request, "encyclopedia/error.html")
     else:
-        return render(request, "encyclopedia/entry.html", {
-            "html": html
-        })
+        return render(request, "encyclopedia/entry.html")
