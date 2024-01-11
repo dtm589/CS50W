@@ -21,6 +21,11 @@ def index(request):
 def entry(request, title):
     html = convert_md_to_html(title)
     if html == None:
-        return render(request, "encyclopedia/error.html")
+        return render(request, "encyclopedia/error.html", {
+            "message": "This entry does not exist, yet!"
+        })
     else:
-        return render(request, "encyclopedia/entry.html")
+        return render(request, "encyclopedia/entry.html", {
+            "title" : title,
+            "html" : html
+        })
