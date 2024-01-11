@@ -1,3 +1,5 @@
 # JavaScript
 
-A programming language used in web development.
+
+
+A programming language used in web development. Its awesome!
