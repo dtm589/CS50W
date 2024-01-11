@@ -39,3 +39,12 @@ def search(request):
                 "title" : entry_search,
                 "html" : html
             })
+        else:
+            all_entries = util.list_entries()
+            recommedation = []
+            for entry in all_entries:
+                if entry_search.lower() in entry.lower():
+                    recommedation.append(entry)
+            return render(request, "encyclopedia/recommended.html", {
+                "recommedation" : recommedation
+            })
