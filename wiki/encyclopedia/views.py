@@ -48,3 +48,9 @@ def search(request):
             return render(request, "encyclopedia/recommended.html", {
                 "recommedation" : recommedation
             })
+            
+def new(request):
+    if request.method == "GET":
+        return render(request, "encyclopedia/new_page.html")
+    elif request.method == "POST":
+        return
