@@ -8,7 +8,10 @@ from .models import *
 
 
 def index(request):
-    return render(request, "auctions/index.html")
+    all_listing = Listing.objects.filter(is_active=True)
+    return render(request, "auctions/index.html", {
+        "listings" : all_listing
+    })
 
 
 def login_view(request):
@@ -97,3 +100,8 @@ def create(request):
             "category" : all_categories
         })
         
+def categories(request):
+    all_categories = Category.objects.all()
+    return render(request, "auctions/categories.html", {
+        "category" : all_categories
+    })
