@@ -8,5 +8,6 @@ urlpatterns = [
     path("logout", views.logout_view, name="logout"),
     path("register", views.register, name="register"),
     path("create/", views.create, name="create"),
-    path("categories", views.categories, name="categories")
+    path("categories", views.categories, name="categories"),
+    path('<str:category>', views.select_category, name='select_category')
 ]

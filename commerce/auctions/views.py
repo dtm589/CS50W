@@ -105,3 +105,9 @@ def categories(request):
     return render(request, "auctions/categories.html", {
         "category" : all_categories
     })
+
+def select_category(request, category):
+    all_listing = Listing.objects.filter(category=category)
+    return render(request, "auctions/select_category.html", {
+        "listings" : all_listing
+    })
