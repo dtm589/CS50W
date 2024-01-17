@@ -64,13 +64,29 @@ def register(request):
 
 def create(request):
     if request.method == "POST":
-        title = request.title
-        description = request.description
-        image_url = request.image_url
-        price = request.price
-        category = request.category
+        #get the data from the form
+        title = request.POST["title"]
+        description = request.POST["description"]
+        image_url = request.POST["image_url"]
+        price = request.POST["price"]
+        category = request.POST["category"]
+        current_user = request.user
+        
+        #get specific category
+        category_data = Category.objects.get(category_name=category)
+        
+        #create new listing object
+        new_listing = Listing(
+            title = title,
+            description = description,
+            image_url = image_url,
+            price = float(price),
+            category = category_data,
+            owner = current_user
+        )
         
         #add to database here
+        new_listing.save()
         
         #redirect to new listing NEED TO FIX
         return HttpResponseRedirect(reverse("index"))
