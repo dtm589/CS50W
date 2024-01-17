@@ -7,6 +7,9 @@ class User(AbstractUser):
 
 class Category(models.Model):
     category_name = models.CharField(max_length=40)
+    
+    def __str__(self):
+        return self.category_name
 
 class Listing(models.Model):
     title = models.CharField(max_length=35)
@@ -16,6 +19,9 @@ class Listing(models.Model):
     owner = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True, related_name="user")
     is_active = models.BooleanField(default=True)
     category = models.ForeignKey(Category, on_delete=models.CASCADE, blank=True, null=True, related_name="category")
+    
+    def __str__(self):
+        return self.title
     
 
 '''
