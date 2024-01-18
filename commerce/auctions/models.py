@@ -18,7 +18,8 @@ class Listing(models.Model):
     price = models.FloatField()
     owner = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True, related_name="user")
     is_active = models.BooleanField(default=True)
-    category = models.ForeignKey(Category, on_delete=models.CASCADE, blank=True, null=True, related_name="category")
+    category = models.ForeignKey(Category, on_delete=models.CASCADE, blank=True, null=True, related_name="listings_category")
+    categories = models.ManyToManyField(Category, blank=True, related_name="select_category")
     
     def __str__(self):
         return self.title

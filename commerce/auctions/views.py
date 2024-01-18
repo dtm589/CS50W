@@ -106,8 +106,12 @@ def categories(request):
         "category" : all_categories
     })
 
-def select_category(request, category):
-    all_listing = Listing.objects.filter(category=category)
+def listing_list(request, category_id):
+    from django.shortcuts import get_object_or_404
+    category = get_object_or_404(Category, pk=category_id)
+    # use a reverse lookup on listings_category foreign key name
+    listings = category.listings_category.all()
     return render(request, "auctions/select_category.html", {
-        "listings" : all_listing
+        "listings" : listings,
+        "category" : category,
     })
