@@ -118,14 +118,27 @@ def listing_list(request, category_id):
     
 def listing(request, id):
     listingData = Listing.objects.get(pk=id)
-    in_watch_list = True
+    in_watch_list = request.user in listingData.watch_list.all()
     return render(request, "auctions/listing.html", {
         "listing" : listingData,
         "in_watch_list" : in_watch_list
     })
     
-def removeWatchList(request):
-    
+def removeWatchList(request, id):
+    listingData = Listing.objects.get(pk=id)
+    currentUser = request.user
+    listingData.watch_list.remove(currentUser)
+    return HttpResponseRedirect(reverse("listing", args=(id, )))
 
-def addWatchList(request):
-    
+def addWatchList(request, id):
+    listingData = Listing.objects.get(pk=id)
+    currentUser = request.user
+    listingData.watch_list.add(currentUser)
+    return HttpResponseRedirect(reverse("listing", args=(id, )))
+
+def displayWatchList(request):
+    currentUser = request.user
+    list = currentUser.listingWatchList.all()
+    return render(request, "auctions/watchList.html", {
+        "list" : list
+    })

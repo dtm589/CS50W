@@ -15,7 +15,10 @@
                     <input type="submit" class="btn btn-danger" value="Remove from Watch List">
                 </form> 
             {% else %}
-                <h6> Add to Watch List </h6>
+                <form action="{% url 'addWatchList' id=listing.id %}" method="POST">
+                    {% csrf_token %}
+                    <input type="submit" class="btn btn-success" value="Add to Watch List">
+                </form>
             {% endif %}
         {% endif %}
     </div>
