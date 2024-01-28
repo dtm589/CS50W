@@ -26,9 +26,10 @@ class Listing(models.Model):
         return self.title
     
 
-'''
-Models: Your application should have at least three models in addition to the User model: 
-one for auction listings, one for bids, and one for comments made on auction listings. 
-Its up to you to decide what fields each model should have, and what the types of those fields should be. 
-You may have additional models if you would like.
-'''
+class Comment(models.Model):
+    author = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True, related_name="userComment")
+    listing = models.ForeignKey(Listing, on_delete=models.CASCADE, blank=True, null=True, related_name="listingComment")
+    message = models.CharField(max_length=500)
+    
+    def __str__(self):
+        return f"{self.author} comments on {self.listing}: {self.message}"
