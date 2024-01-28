@@ -1,0 +1,22 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+    <h2> {{listing.title}} </h2>
+    <img src = "{{listing.image_url}}" alt="{{ listing.title}}">
+    <p> {{ listing.description}} </p>
+    <p>Listed By: {{ listing.owner }} </p>
+    <h5> ${{ listing.price}} </h5>
+
+    <div>
+        {% if user.is_authenticated %}
+            {% if in_watch_list %}
+                <form action="{% url 'removeWatchList' id=listing.id %}" method="POST">
+                    {% csrf_token %}
+                    <input type="submit" class="btn btn-danger" value="Remove from Watch List">
+                </form> 
+            {% else %}
+                <h6> Add to Watch List </h6>
+            {% endif %}
+        {% endif %}
+    </div>
+{% endblock %}
