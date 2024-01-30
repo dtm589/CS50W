@@ -7,7 +7,7 @@
     <p>Listed By: {{ listing.owner }} </p>
     <h5> ${{ listing.price}} </h5>
 
-    <div>
+    <div style="margin:10px">
         {% if user.is_authenticated %}
             {% if in_watch_list %}
                 <form action="{% url 'removeWatchList' id=listing.id %}" method="POST">
@@ -26,11 +26,18 @@
     <div>
         <h4> Comments: </h4>
         {% if user.is_authenticated %}
-            <form action="{% url 'addComment' id=listing.id %}" method="POST">
+            <form style="margin:10px" action="{% url 'addComment' id=listing.id %}" method="POST">
                 {% csrf_token %}
                 <input type="text" name="newComment" placeholder="Add a new comment...">
                 <input type="submit" class="btn btn-success" value="Post Comment">
             </form> 
         {% endif %}
+
+        {% for comment in comments %}
+            <div style="border:1px solid black; margin: 5px">
+                <h6 style="margin-left:5px">{{ comment.author }} commented:</h6>
+                <p style="margin-left:5px">{{ comment.message }} </p>
+            </div>
+        {% endfor %}
     </div>
 {% endblock %}

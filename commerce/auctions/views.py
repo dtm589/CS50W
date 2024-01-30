@@ -119,9 +119,11 @@ def listing_list(request, category_id):
 def listing(request, id):
     listingData = Listing.objects.get(pk=id)
     in_watch_list = request.user in listingData.watch_list.all()
+    allComments = Comment.objects.filter(listing=listingData)
     return render(request, "auctions/listing.html", {
         "listing" : listingData,
-        "in_watch_list" : in_watch_list
+        "in_watch_list" : in_watch_list,
+        "comments" : allComments
     })
     
 def removeWatchList(request, id):
@@ -142,3 +144,18 @@ def displayWatchList(request):
     return render(request, "auctions/watchList.html", {
         "list" : list
     })
+    
+def addComment(request, id):
+    currentUser = request.user
+    listingData = Listing.objects.get(pk=id)
+    message = request.POST['newComment']
+    
+    newComment = Comment(
+        author = currentUser,
+        listing = listingData,
+        message = message
+    )
+    
+    newComment.save()
+    
+    return HttpResponseRedirect(reverse("listing", args=(id, )))
