@@ -2,8 +2,8 @@
 
 {% block body %}
     <h2>Active Listings:</h2>
-
-    <div class="row mx-3">
+    <br>
+    <div>
         {% for listing in listings %}
         <div class="card">
             <img class="card-img-top" src="{{ listing.image_url}}">
@@ -13,6 +13,7 @@
                 <p class="card-text">{{ listing.price.bid }}</p>
                 <a href="{% url 'listing' id=listing.id %}" class="btn btn-primary">View Listing</a>
             </div>
+            <br>
         </div>
         {% endfor %}
     </div>
