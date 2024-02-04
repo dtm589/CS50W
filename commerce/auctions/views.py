@@ -78,12 +78,19 @@ def create(request):
         #get specific category
         category_data = Category.objects.get(category_name=category)
         
+        #create new bid object
+        new_bid = Bid(
+            bid = float(price),
+            user = current_user
+        )
+        new_bid.save()
+        
         #create new listing object
         new_listing = Listing(
             title = title,
             description = description,
             image_url = image_url,
-            price = float(price),
+            price = new_bid,
             category = category_data,
             owner = current_user
         )
@@ -109,6 +116,7 @@ def categories(request):
 def listing_list(request, category_id):
     from django.shortcuts import get_object_or_404
     category = get_object_or_404(Category, pk=category_id)
+    
     # use a reverse lookup on listings_category foreign key name
     listings = category.listings_category.all()
     return render(request, "auctions/select_category.html", {

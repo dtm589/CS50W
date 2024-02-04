@@ -6,16 +6,21 @@
         <form action="{% url 'create' %}" method="POST">
             {% csrf_token %}
             <input type='text' class="form-control" name="title" placeholder="Title">
+            <br>
             <input type='text' class="form-control" name="description" placeholder="Description of product...">
+            <br>
             <input type='text' class="form-control" name="image_url" placeholder="URL of image">
+            <br>
             <label for="price">Enter the Starting Bid:</label>
             <input type="number" class="form-control" name="price" step="0.01" min="0">
+            <br>
             <label for="category">Select the Category:</label>
             <select name="category" class="form-control">
                 {% for cat in category %}
                     <option value="{{ cat }}">{{ cat }}</option>
                 {% endfor %}
             </select>
+            <br>
             <input type="submit" class="btn btn-primary" value="List">
         </form>
     </div>
