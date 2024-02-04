@@ -167,3 +167,36 @@ def addComment(request, id):
     newComment.save()
     
     return HttpResponseRedirect(reverse("listing", args=(id, )))
+
+def addBid(request, id):
+    newBid = request.POST['newBid']
+    listingData = Listing.objects.get(pk=id)
+    in_watch_list = request.user in listingData.watch_list.all()
+    allComments = Comment.objects.filter(listing=listingData)
+    
+    if float(newBid) > listingData.price.bid:
+        updateBid = Bid(
+            user = request.user,
+            bid=float(newBid)
+        )
+        updateBid.save()
+        
+        listingData.price = updateBid
+        listingData.save()
+        
+        return render(request, "auctions/listing.html", {
+            "listing" : listingData,
+            "message": "Successful Bid",
+            "update" : True,
+            "in_watch_list" : in_watch_list,
+            "comments" : allComments
+        })
+    
+    else:
+        return render(request, "auctions/listing.html", {
+            "listing" : listingData,
+            "message": "Failed Bid, please place a bid higher than the current price.",
+            "update" : False,
+            "in_watch_list" : in_watch_list,
+            "comments" : allComments
+        })

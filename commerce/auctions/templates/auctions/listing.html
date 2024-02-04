@@ -2,10 +2,6 @@
 
 {% block body %}
     <h2> {{listing.title}} </h2>
-    <img src = "{{listing.image_url}}" alt="{{ listing.title}}">
-    <p> {{ listing.description}} </p>
-    <p>Listed By: {{ listing.owner }} </p>
-    <h5> ${{ listing.price.bid }} </h5>
 
     <div style="margin:10px">
         {% if user.is_authenticated %}
@@ -22,6 +18,36 @@
             {% endif %}
         {% endif %}
     </div>
+
+    <img src = "{{listing.image_url}}" alt="{{ listing.title}}">
+    <p> {{ listing.description}} </p>
+    <p>Listed By: {{ listing.owner }} </p>
+    <h5> ${{ listing.price.bid }} </h5>
+
+
+
+    {% if user.is_authenticated %}
+        <div>
+            <form style="margin:10px" action="{% url 'addBid' id=listing.id %}" method="POST">
+                {% csrf_token %}
+                <label for="bid">Add Bid</label>
+                <input type="number" name="newBid" min="0">
+                <input type="submit" class="btn btn-primary" value="Add Bid">
+            </form> 
+        </div>
+
+        {% if message %}
+            {% if updated %}
+                <div class="alert alert-success" role="alert">
+                    {{ message }}
+                </div>
+            {% else %}
+                <div class="alert alert-danger" role="alert">
+                    {{ message }}
+                </div>  
+            {% endif %}
+        {% endif %}
+    {% endif %}
 
     <div>
         <h4> Comments: </h4>
